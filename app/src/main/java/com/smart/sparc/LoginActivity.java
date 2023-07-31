@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, loginParams,
                 response -> {
-                    // Handle successful login response here
                     try {
                         String status = response.getString("status");
                         if (status.equals("200")) {
@@ -89,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    // Handle error response here
                     Toast.makeText(LoginActivity.this, "Error during login", Toast.LENGTH_SHORT).show();
                 }) {
             @Override

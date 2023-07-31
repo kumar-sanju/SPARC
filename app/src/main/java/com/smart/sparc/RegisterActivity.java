@@ -6,10 +6,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,30 +23,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.smart.sparc.room.MultipartRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import java.io.File;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-//import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -59,11 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView ivProfileImage;
     private Uri selectedImageUri;
 
-    private ApiClient apiClient;
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_PICK = 2;
-    private static final int PERMISSION_REQUEST_CAMERA = 101;
     private static final int PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 102;
 
     private Bitmap selectedBitmap;
@@ -103,20 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivityForResult(pickImageIntent, REQUEST_IMAGE_PICK);
                     }
                 }
-
-//                if (ContextCompat.checkSelfPermission(RegisterActivity.this,
-//                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(RegisterActivity.this,
-//                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                            PERMISSION_READ_EXTERNAL_STORAGE);
-//                } else {
-//                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                    }
-//
-////                    openGallery();
-//                }
             }
         });
 
@@ -138,29 +103,12 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK && data != null) {
-//            selectedImageUri = data.getData();
-//            try {
-//                ivProfileImage.setImageURI(selectedImageUri);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
 
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-//            Uri imageUri = data.getData();
-//            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-//                // Now you have the selected image as a Bitmap (bitmap)
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
             Uri imageUri = data.getData();
             try {
                 selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 ivProfileImage.setImageBitmap(selectedBitmap);
-//                ivProfileImage.setImageURI(selectedImageUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -179,13 +127,6 @@ public class RegisterActivity extends AppCompatActivity {
         String roleId = spinnerRole.getSelectedItem().toString();
 
         int selectedSpinnerPosition = spinnerRole.getSelectedItemPosition();
-
-//        String imagePath = null;
-////        String imagePath = "";
-//        if (selectedImageUri != null) {
-//            // Get the file path from the selected image URI
-//            imagePath = getImagePathFromUri(selectedImageUri);
-//        }
 
         if (name.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty()
                 || address.isEmpty() || age.isEmpty() || phoneNo.isEmpty() || roleId.isEmpty()) {
@@ -253,6 +194,7 @@ public class RegisterActivity extends AppCompatActivity {
         spinnerRole.setSelection(0); // Set the first item as default in the spinner
         ivProfileImage.setImageResource(R.drawable.ic_launcher_background);
         selectedImageUri = null;
+        selectedBitmap = null;
     }
 
 //    private String getImagePathFromUri(Uri uri) {

@@ -50,8 +50,8 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dont Have An Account Register"
-        android:textSize="24sp"
+        android:text="Don't Have An Account Register"
+        android:textSize="20sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"/>
