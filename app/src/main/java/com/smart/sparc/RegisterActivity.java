@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.Volley;
-import com.smart.sparc.room.MultipartRequest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
